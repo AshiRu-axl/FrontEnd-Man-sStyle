@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* filepath: c:\Users\Admin\Documents\FrontEnd_MansStyle\src\index.css */
+
+  /* Gradient mask for fading effect */
+
+ /* filepath: c:\Users\Admin\Documents\FrontEnd_MansStyle\src\index.css */
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  /* Chrome, Safari and Opera */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.standar-gradient {
+  background-image: linear-gradient(to right, #818cf8, #e879f9, #f472b6);
+}
+
+.shadow-custom {
+  box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.custom-input {
+  background-color: white;
+  color: #1e3a8a; /* text-blue-900 */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 0.5rem 1rem; /* py-2 px-4 */
+  border: 1px solid #bfdbfe; /* border-blue-200 */
+  outline: none;
+}
+
+.custom-input::placeholder {
+  color: #60a5fa; /* placeholder-blue-400 */
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 2px #3b82f6; /* ring-2 ring-blue-500 */
+}
+
+.input-filter {
+  @apply bg-white text-blue-900 placeholder-blue-900 rounded-lg px-4 py-2 border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
