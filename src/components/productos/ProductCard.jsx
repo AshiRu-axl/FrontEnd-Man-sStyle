@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ModalDescarte from "./ModalDescarte";
-import { DescartarProducto } from "@/services/productosService";
+import { DescartarProducto } from "@/services/ProductosService";
 
 const ProductCard = ({
   product,

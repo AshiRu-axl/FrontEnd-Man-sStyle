@@ -26,7 +26,6 @@ const CategoryPage = () => {
     // Cargar categorías activas
     obtenerCategoriasActivas()
       .then((data) => {
-        console.log("Categorías activas:", data); // Debugging line
         setCategoryData(data);
       })
       .catch((error) => {
@@ -36,7 +35,6 @@ const CategoryPage = () => {
     // Cargar marcas
     obtenerMarcas()
       .then((data) => {
-        console.log("Marcas:", data); // Debugging line
         setBrandData(data);
       })
       .catch((error) => {
@@ -48,7 +46,6 @@ const CategoryPage = () => {
     // Cargar categorías activas
     obtenerCategoriasActivas()
       .then((data) => {
-        console.log("Categorías activas:", data); // Debugging line
         setCategoryData(data);
       })
       .catch((error) => {
@@ -60,7 +57,6 @@ const CategoryPage = () => {
     // Cargar marcas
     obtenerMarcas()
       .then((data) => {
-        console.log("Marcas:", data); // Debugging line
         setBrandData(data);
       })
       .catch((error) => {

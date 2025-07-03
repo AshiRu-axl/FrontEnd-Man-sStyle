@@ -14,7 +14,6 @@ const CartSummaryBuying = ({
     (sum, item) => sum + item.quantity * (item.buyingPrice || 0),
     0
   );
-  console.log("Cart Items:", cartItems);
   return (
     <div className="space-y-4 overflow-y-auto bg-white rounded-xl border border-slate-300 ring-1 ring-blue-500/30 shadow-md p-8 w-full">
       {cartItems.map((item) => (

@@ -75,7 +75,6 @@ const ClientsTable = () => {
 		  <Modal position='center'></Modal>	
           <button
             className="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg flex items-center"
-            onClick={() => console.log("Add new user")}
           >
 			
             <Plus className="mr-2" size={18} />

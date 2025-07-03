@@ -85,7 +85,6 @@ const RegistrosVenta = () => {
         pendingOrders: 0,
         totalRevenue,
       });
-      console.log(data)
     });
   }, []);
 

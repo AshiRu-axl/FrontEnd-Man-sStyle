@@ -121,7 +121,6 @@ const ProductSection = () => {
     inputBgColor: "bg-[#23272f] text-white",
     hoverBgColor: "hover:bg-[#2563eb]/30",
   };
-  console.log(`filterd produc ${filteredProducts}`);
 
   return (
     <section className="py-6 px-4 bg-[#18181b] rounded-xl">

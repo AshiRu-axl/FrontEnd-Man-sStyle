@@ -59,7 +59,6 @@ export const obtenerEmpleadoPorId = async (id) => {
 // Agregar empleado
 export const agregarEmpleado = async (empleado) => {
     try {
-        console.log("Empleado antes de enviar:", JSON.stringify(empleado, null, 2)); //        
         const response = await api.post("/empleados/agregar", empleado);
         return response.data;
     } catch (error) {

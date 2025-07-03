@@ -75,7 +75,6 @@ const NewProduct = ({
       if (newProduct.archivoImagen) {
         const extension = newProduct.archivoImagen.name.split('.').pop();
         const nombreFinal = `Producto_${siguienteId}.${extension}`;
-        console.log("Nombre final de la imagen:", nombreFinal);
         const resultado = await subirImagen(newProduct.archivoImagen, nombreFinal);
 
         if (typeof resultado === "string") {

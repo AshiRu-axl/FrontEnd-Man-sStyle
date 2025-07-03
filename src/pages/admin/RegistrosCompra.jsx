@@ -154,7 +154,6 @@ const RegistroCompra = () => {
   const comprasOrdenadas = orderAsc
     ? comprasFiltradas
     : comprasFiltradas.toReversed();
-  console.log("Compras del registro:", compras);
 
   if (loading || error) {
     return (

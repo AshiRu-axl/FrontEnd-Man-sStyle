@@ -41,7 +41,6 @@ const BuyingPage = () => {
   };
   useEffect(() => {
     fetchProducts();
-    console.log(localStorage.getItem("idSucursal"));
   }, []);
 
   // Filtrar productos
@@ -105,7 +104,6 @@ const BuyingPage = () => {
     setPriceLeft(true);
     return;
   }
-    console.log(cartItems);
 
     try {
       const compraData = {
