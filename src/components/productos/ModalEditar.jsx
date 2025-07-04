@@ -95,13 +95,19 @@ const ModalEditar = ({
     try {
       let urlImagenFinal = selectedProducto.url_image;
 
+      // Eliminar la imagen existente si hay una nueva imagen
       if (selectedProducto.nuevaImagen) {
-        const resultado = await subirImagen(selectedProducto.nuevaImagen);
-        urlImagenFinal = resultado?.url || resultado;
-      } else if (
-        selectedProducto.usarURL &&
-        esURLValida(selectedProducto.url_image)
-      ) {
+        if (selectedProducto.url_image && esURLValida(selectedProducto.url_image)) {
+          await eliminarImagen(selectedProducto.url_image);
+        }
+
+        // Subir la nueva imagen
+        const extension = selectedProducto.nuevaImagen.name.split('.').pop();
+        const nombreFinal = `Producto_${selectedProducto.ID_Producto}.${extension}`;
+        const resultadoSubida = await subirImagen(selectedProducto.nuevaImagen, nombreFinal);
+        urlImagenFinal = resultadoSubida?.url || resultadoSubida;
+        
+      } else if (selectedProducto.usarURL && esURLValida(selectedProducto.url_image)) {
         urlImagenFinal = selectedProducto.url_image;
       }
 
@@ -121,8 +127,13 @@ const ModalEditar = ({
         productoActualizado
       );
 
-      if (!resultado) throw new Error("Error al actualizar");
-
+      if (!resultado) {
+        // Eliminar la nueva imagen si la actualización del producto falla
+        if (selectedProducto.nuevaImagen) {
+          await eliminarImagen(urlImagenFinal);
+        }
+        throw new Error("Error al actualizar el producto");
+      }
       refrescarProductos();
       setOpenToastEdit(true); // Mostrar toast de edición exitosa
       EditModalClose();
