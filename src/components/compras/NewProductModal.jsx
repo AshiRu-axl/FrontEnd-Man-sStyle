@@ -73,9 +73,12 @@ const NewProduct = ({
 
     try {
       if (newProduct.archivoImagen) {
-        const extension = newProduct.archivoImagen.name.split('.').pop();
+        const extension = newProduct.archivoImagen.name.split(".").pop();
         const nombreFinal = `Producto_${siguienteId}.${extension}`;
-        const resultado = await subirImagen(newProduct.archivoImagen, nombreFinal);
+        const resultado = await subirImagen(
+          newProduct.archivoImagen,
+          nombreFinal
+        );
 
         if (typeof resultado === "string") {
           urlFinal = resultado;
@@ -136,7 +139,6 @@ const NewProduct = ({
         Cantidad: "",
         archivoImagen: null,
       });
-
     } catch (error) {
       // Si algo falla, eliminar imagen si era local
       if (urlFinal && !esURLValida(newProduct.url_image)) {
@@ -304,33 +306,33 @@ const NewProduct = ({
                 <label className="block text-sm font-medium text-blue-900 mb-1">
                   Subir Imagen (opcional hasta 600 KB)
                 </label>
-             <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
+                <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
                   Seleccionar Imagen (600 KB máx.)
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const archivo = e.target.files[0];
-          if (!archivo) return;
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const archivo = e.target.files[0];
+                      if (!archivo) return;
 
-          const maxSizeMB = 600; // Tamaño máximo en MB
-          const maxSizeBytes = 600 * 1024; // 600 KB
+                      const maxSizeMB = 600; // Tamaño máximo en MB
+                      const maxSizeBytes = 600 * 1024; // 600 KB
 
-          if (archivo.size > maxSizeBytes) {
-            alert(
-              `La imagen no puede ser mayor a ${maxSizeMB} kb.`
-            );
-            return;
-          }
+                      if (archivo.size > maxSizeBytes) {
+                        alert(
+                          `La imagen no puede ser mayor a ${maxSizeMB} kb.`
+                        );
+                        return;
+                      }
 
-          setSelectedProducto((prev) => ({
-            ...prev,
-            nuevaImagen: archivo,
-          }));
-        }}
-        className="hidden"
-      />
-    </label>
+                      setNewProduct((prev) => ({
+                        ...prev,
+                        archivoImagen: archivo,
+                      }));
+                    }}
+                    className="hidden"
+                  />
+                </label>
               </div>
               <div>
                 <label className="block text-sm font-medium text-blue-900 mb-1">
@@ -370,7 +372,7 @@ const NewProduct = ({
           </div>
         </form>
       </div>
- 
+
       <ShowToast
         show={showErrorToast}
         onClose={() => setShowErrorToast(false)}
