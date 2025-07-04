@@ -6,11 +6,13 @@ import {
   parlantes,
   perfume,
   protectoresCam,
-  tripode,
+  tripode
 } from "@/assest/carrousel/exports";
 import Slider from "@/components/public/landing/Slider";
 import Navbar from "@/components/public/landing/Navbar";
 import LocationSection from "@/components/public/landing/LocationSection";
+import tienda from "@/assest/tienda.webp"; // Import the store image
+
 
 const LandingPage = () => {
   const Images = [airpods, labial, parlantes, perfume, protectoresCam, tripode];
@@ -52,11 +54,11 @@ const LandingPage = () => {
       </section>
 
       {/* Styled "Variedad en un solo lugar" Section */}
-      <section className="flex flex-col md:flex-row items-center py-16 px-4 bg-[#23272f] rounded-xl shadow-lg mx-4 lg:mx-24 text-align">
+      <section className="flex flex-col md:flex-row items-center py-16 px-4 bg-[#23272f] rounded-xl shadow-lg mx-4 lg:mx-24">
         <div className="w-full md:w-1/2 flex justify-center items-center mb-8 md:mb-0 ">
           <div className="w-80 h-80 bg-gray-900 rounded-xl overflow-hidden shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302b?auto=format&fit=crop&w=400&q=80"
+              src={tienda}
               alt="Foto del local"
               className="object-cover w-full h-full scale-110"
               onError={(e) => {
@@ -66,11 +68,11 @@ const LandingPage = () => {
           </div>
         </div>
         {/* Texto a la derecha */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center text-center min-h-72">
-          <h2 className=" text-4xl md:text-5xl font-bold mb-8 text-[#a78bfa] font-[poppins]">
+        <div className=" md:w-1/2 flex flex-col justify-center items-center text-center min-h-72 pr-0 md:pr-11">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-[#a78bfa]">
             Variedad en un solo lugar
           </h2>
-          <p className="text-lg md:text-xl text-gray-200 font-[poppins] px-10">
+          <p className="text-lg md:text-xl text-center  text-gray-200 font-[poppins]">
             La sección de productos está actualizada en tiempo real. ¡Todo se
             encuentra disponible! Abajo podrá ver las ubicaciones y la dirección
             de nuestras dos sucursales.
@@ -91,7 +93,7 @@ const LandingPage = () => {
             <a href="#" className="hover:text-[#2563eb] transition">
               Facebook
             </a>
-           
+
             <a href="#" className="hover:text-[#2563eb] transition">
               WhatsApp
             </a>
