@@ -110,11 +110,6 @@ const ModalEditar = ({
         urlImagenFinal = selectedProducto.url_image;
       }
 
-      // Validar urlImagenFinal antes de continuar
-      if (!urlImagenFinal) {
-        throw new Error("La URL de la imagen no es válida");
-      }
-
       const productoActualizado = {
         ID_Producto: selectedProducto.ID_Producto,
         Nombre: selectedProducto.Nombre.trim(),
