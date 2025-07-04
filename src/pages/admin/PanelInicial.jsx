@@ -99,7 +99,7 @@ const OverviewPage = () => {
               icon={DollarSign}
               value={
                 activeTotals
-                  ? `$${activeTotals.GananciasTotales}`
+                  ? `C$${activeTotals.GananciasTotales}`
                   : "Cargando..."
               }
               color="#42CF65"

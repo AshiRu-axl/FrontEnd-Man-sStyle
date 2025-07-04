@@ -5,7 +5,7 @@ import { obtenerCategoriasActivas } from "../../services/CategoriasService";
 import { obtenerSucursales } from "../../services/SucursalService";
 import { actualizarProducto } from "../../services/ProductosService";
 import { obtenerMarcas } from "../../services/MarcasService";
-import { subirImagen, eliminarImagen } from "../../services/UploadService";
+import { subirImagen } from "../../services/UploadService";
 import ShowToast from "@/components/common/ShowToast";
 
 const ModalEditar = ({
@@ -91,22 +91,17 @@ const ModalEditar = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       let urlImagenFinal = selectedProducto.url_image;
 
-      // Eliminar la imagen existente si hay una nueva imagen
       if (selectedProducto.nuevaImagen) {
-        if (selectedProducto.url_image && esURLValida(selectedProducto.url_image)) {
-          await eliminarImagen(selectedProducto.url_image);
-        }
-
-        // Subir la nueva imagen
-        const extension = selectedProducto.nuevaImagen.name.split('.').pop();
-        const nombreFinal = `Producto_${selectedProducto.ID_Producto}.${extension}`;
-        const resultadoSubida = await subirImagen(selectedProducto.nuevaImagen, nombreFinal);
-        urlImagenFinal = resultadoSubida?.url || resultadoSubida;
-        
-      } else if (selectedProducto.usarURL && esURLValida(selectedProducto.url_image)) {
+        const resultado = await subirImagen(selectedProducto.nuevaImagen);
+        urlImagenFinal = resultado?.url || resultado;
+      } else if (
+        selectedProducto.usarURL &&
+        esURLValida(selectedProducto.url_image)
+      ) {
         urlImagenFinal = selectedProducto.url_image;
       }
 
@@ -121,25 +116,21 @@ const ModalEditar = ({
         Detalles: selectedProducto.Detalles?.trim() || "",
       };
 
-      const resultado = await actualizarProducto(selectedProducto.ID_Producto, productoActualizado);
+      const resultado = await actualizarProducto(
+        selectedProducto.ID_Producto,
+        productoActualizado
+      );
 
-      if (!resultado) {
-        // Eliminar la nueva imagen si la actualización del producto falla
-        if (selectedProducto.nuevaImagen) {
-          await eliminarImagen(urlImagenFinal);
-        }
-        throw new Error("Error al actualizar el producto");
-      }
+      if (!resultado) throw new Error("Error al actualizar");
 
       refrescarProductos();
-      setOpenToastEdit(true);
+      setOpenToastEdit(true); // Mostrar toast de edición exitosa
       EditModalClose();
     } catch (error) {
       console.error("Error:", error);
       alert(error.response?.data?.message || "Error al actualizar el producto");
     }
   };
-
 
   return (
     <>
@@ -277,19 +268,33 @@ const ModalEditar = ({
                   <label className="block text-sm font-medium text-blue-900 mb-1">
                     Subir Imagen (opcional)
                   </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const archivo = e.target.files[0];
-                      setSelectedProducto({
-                        ...selectedProducto,
-                        nuevaImagen: archivo,
-                        usarURL: false,
-                      });
-                    }}
-                    className="text-blue-900"
-                  />
+ <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
+                  Seleccionar Imagen (600 KB máx.)
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => {
+          const archivo = e.target.files[0];
+          if (!archivo) return;
+
+          const maxSizeMB = 600; // Tamaño máximo en MB
+          const maxSizeBytes = 600 * 1024; // 600 KB
+
+          if (archivo.size > maxSizeBytes) {
+            alert(
+              `La imagen no puede ser mayor a ${maxSizeMB} kb.`
+            );
+            return;
+          }
+
+          setSelectedProducto((prev) => ({
+            ...prev,
+            nuevaImagen: archivo,
+          }));
+        }}
+        className="hidden"
+      />
+    </label>
                 </div>
 
                 <div>

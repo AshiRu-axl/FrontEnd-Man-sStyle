@@ -79,7 +79,7 @@ const ProductCard = ({
           </div>
           <div className="flex items-end justify-between mt-4">
             <span className="text-xs text-gray-400">Stock: {stock}</span>
-            <span className="text-lg font-bold text-blue-600">${price}</span>
+            <span className="text-lg font-bold text-blue-600">C${price}</span>
           </div>
         </div>
       </motion.div>
@@ -144,7 +144,7 @@ const ProductCard = ({
                   <div className="flex flex-wrap gap-2 justify-between">
                     <span className="text-gray-400">Precio:</span>
                     <span className="font-semibold text-blue-700">
-                      ${price}
+                      C${price}
                     </span>
                   </div>
                 </div>

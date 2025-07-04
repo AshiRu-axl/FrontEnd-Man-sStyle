@@ -220,6 +220,7 @@ const ManageUser = ({ open, onClose, userData, OnUserComplete }) => {
 
         // Validación de duplicados
         usuariosExistentes.forEach((usuario) => {
+            console.log("Validando usuario:", usuario);
             if (
                 usuario.ID_Empleado !== formData.ID_Empleado &&
                 usuario.Cedula === formData.Cedula
@@ -236,7 +237,7 @@ const ManageUser = ({ open, onClose, userData, OnUserComplete }) => {
             }
             if (
                 usuario.ID_Empleado !== formData.ID_Empleado &&
-                usuario.Usuario === formData.NombreDeUsuario
+                usuario.usuario === formData.NombreDeUsuario
             ) {
                 newErroresDuplicados["NombreDeUsuario"] = true;
                 newTouchedFields["NombreDeUsuario"] = true;

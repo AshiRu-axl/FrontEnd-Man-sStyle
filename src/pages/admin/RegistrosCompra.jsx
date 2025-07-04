@@ -181,13 +181,13 @@ const RegistroCompra = () => {
         <StatCard
           name="Inversión Total"
           icon={DollarSign}
-          value={`$${stats.inversionTotal.toFixed(2)}`}
+          value={`C$${stats.inversionTotal.toFixed(2)}`}
           color="#EF4444"
         />
         <StatCard
           name="Promedio por Compra"
           icon={TrendingUp}
-          value={`$${stats.promedioCompra.toFixed(2)}`}
+          value={`C$${stats.promedioCompra.toFixed(2)}`}
           color="#3B82F6"
         />
         <StatCard

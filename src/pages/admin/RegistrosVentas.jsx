@@ -141,7 +141,7 @@ const RegistrosVenta = () => {
           <StatCard
             name="Ingresos Totales"
             icon={DollarSign}
-            value={`$${stats.totalRevenue.toFixed(2)}`}
+            value={`C$${stats.totalRevenue.toFixed(2)}`}
             color="#EF4444"
           />
 </TopSection>
@@ -182,7 +182,7 @@ const RegistrosVenta = () => {
           </div>
           <div className="flex flex-col w-36">
             <label className="text-blue-900 text-sm mb-1">
-              Mín. ingreso ($)
+              Mín. ingreso (C$)
             </label>
             <input
               type="number"
