@@ -5,11 +5,11 @@ import { obtenerCategoriasActivas } from "../../services/CategoriasService";
 import { obtenerSucursales } from "../../services/SucursalService";
 import { actualizarProducto } from "../../services/ProductosService";
 import { obtenerMarcas } from "../../services/MarcasService";
-import { subirImagen } from "../../services/UploadService";
+import { subirImagen, eliminarImagen } from "../../services/UploadService";
 import ShowToast from "@/components/common/ShowToast";
 
 const ModalEditar = ({
-  openEdit,
+  openEdit, 
   EditModalClose,
   refrescarProductos,
   fetchProductoByID,
