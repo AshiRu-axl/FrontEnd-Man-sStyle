@@ -4,7 +4,7 @@ const LocationSection =  () => {
     return(
 
       <section className="py-16 mt-8 bg-[#18181b] rounded-xl shadow-lg mx-10">
-        <div className=" mx-20 text-center">
+        <div className=" mx-5 lg:mx-20 text-center">
           <h1 className="text-4xl font-bold mb-10 text-[#a78bfa]">
             Nuestras Sucursales
           </h1>
