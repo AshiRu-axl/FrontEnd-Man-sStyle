@@ -91,26 +91,40 @@ const ModalEditar = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
       let urlImagenFinal = selectedProducto.url_image;
 
-      // Eliminar la imagen existente si hay una nueva imagen
+      // Procesamiento de imagen
       if (selectedProducto.nuevaImagen) {
+        // Validar tamaño de imagen (600 KB máximo)
+        const maxSizeBytes = 600 * 1024;
+        if (selectedProducto.nuevaImagen.size > maxSizeBytes) {
+          alert("La imagen no puede ser mayor a 600 KB");
+          return;
+        }
+
+        // Eliminar imagen anterior si existe
         if (selectedProducto.url_image && esURLValida(selectedProducto.url_image)) {
           await eliminarImagen(selectedProducto.url_image);
         }
 
-        // Subir la nueva imagen
+        // Subir nueva imagen
         const extension = selectedProducto.nuevaImagen.name.split('.').pop();
-        const nombreFinal = `Producto_${selectedProducto.ID_Producto}.${extension}`;
+        const nombreFinal = `Producto_${selectedProducto.ID_Producto}_${Date.now()}.${extension}`;
         const resultadoSubida = await subirImagen(selectedProducto.nuevaImagen, nombreFinal);
         urlImagenFinal = resultadoSubida?.url || resultadoSubida;
         
-      } else if (selectedProducto.usarURL && esURLValida(selectedProducto.url_image)) {
+      } else if (selectedProducto.usarURL) {
+        // Validar URL si se está usando
+        if (!esURLValida(selectedProducto.url_image)) {
+          alert("Por favor ingrese una URL válida");
+          return;
+        }
         urlImagenFinal = selectedProducto.url_image;
       }
 
+      // Preparar datos para actualización
       const productoActualizado = {
         ID_Producto: selectedProducto.ID_Producto,
         Nombre: selectedProducto.Nombre.trim(),
@@ -122,21 +136,25 @@ const ModalEditar = ({
         Detalles: selectedProducto.Detalles?.trim() || "",
       };
 
+      // Actualizar producto
       const resultado = await actualizarProducto(
-        selectedProducto.ID_Producto,
+        selectedProducto.ID_Producto, 
         productoActualizado
       );
 
       if (!resultado) {
-        // Eliminar la nueva imagen si la actualización del producto falla
+        // Revertir cambios si falla
         if (selectedProducto.nuevaImagen) {
           await eliminarImagen(urlImagenFinal);
         }
         throw new Error("Error al actualizar el producto");
       }
+
+      // Éxito
       refrescarProductos();
-      setOpenToastEdit(true); // Mostrar toast de edición exitosa
+      setOpenToastEdit(true);
       EditModalClose();
+      
     } catch (error) {
       console.error("Error:", error);
       alert(error.response?.data?.message || "Error al actualizar el producto");
@@ -281,6 +299,7 @@ const ModalEditar = ({
                   </label>
                   <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
                     Seleccionar Imagen (600 KB máx.)
+                    // En el input de archivo:
                     <input
                       type="file"
                       accept="image/*"
@@ -288,22 +307,14 @@ const ModalEditar = ({
                         const archivo = e.target.files[0];
                         if (!archivo) return;
 
-                        const maxSizeMB = 600; // Tamaño máximo en MB
-                        const maxSizeBytes = 600 * 1024; // 600 KB
-
-                        if (archivo.size > maxSizeBytes) {
-                          alert(
-                            `La imagen no puede ser mayor a ${maxSizeMB} kb.`
-                          );
-                          return;
-                        }
-
-                        setSelectedProducto((prev) => ({
-                          ...prev,
+                        setSelectedProducto({
+                          ...selectedProducto,
                           nuevaImagen: archivo,
-                        }));
+                          usarURL: false, // Asegurar que no se use URL si se sube archivo
+                        });
                       }}
                       className="hidden"
+                      id="fileInput"
                     />
                   </label>
                 </div>
