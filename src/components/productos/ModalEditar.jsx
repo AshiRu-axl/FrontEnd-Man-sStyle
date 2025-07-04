@@ -268,33 +268,33 @@ const ModalEditar = ({
                   <label className="block text-sm font-medium text-blue-900 mb-1">
                     Subir Imagen (opcional)
                   </label>
- <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
-                  Seleccionar Imagen (600 KB máx.)
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const archivo = e.target.files[0];
-          if (!archivo) return;
+                  <label className="cursor-pointer inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-lg border border-blue-500 hover:bg-blue-200 transition">
+                    Seleccionar Imagen (600 KB máx.)
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const archivo = e.target.files[0];
+                        if (!archivo) return;
 
-          const maxSizeMB = 600; // Tamaño máximo en MB
-          const maxSizeBytes = 600 * 1024; // 600 KB
+                        const maxSizeMB = 600; // Tamaño máximo en MB
+                        const maxSizeBytes = 600 * 1024; // 600 KB
 
-          if (archivo.size > maxSizeBytes) {
-            alert(
-              `La imagen no puede ser mayor a ${maxSizeMB} kb.`
-            );
-            return;
-          }
+                        if (archivo.size > maxSizeBytes) {
+                          alert(
+                            `La imagen no puede ser mayor a ${maxSizeMB} kb.`
+                          );
+                          return;
+                        }
 
-          setSelectedProducto((prev) => ({
-            ...prev,
-            nuevaImagen: archivo,
-          }));
-        }}
-        className="hidden"
-      />
-    </label>
+                        setSelectedProducto((prev) => ({
+                          ...prev,
+                          nuevaImagen: archivo,
+                        }));
+                      }}
+                      className="hidden"
+                    />
+                  </label>
                 </div>
 
                 <div>

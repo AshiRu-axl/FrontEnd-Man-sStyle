@@ -180,29 +180,14 @@ const NewProduct = ({
               <label className="block text-sm font-medium text-blue-900 mb-1">
                 Nombre
               </label>
-          <input
-  type="file"
-  accept="image/*"
-  onChange={(e) => {
-    const archivo = e.target.files[0];
-    if (!archivo) return;
-
-    const maxSizeBytes = 600 * 1024; // 600 KB
-
-    if (archivo.size > maxSizeBytes) {
-      alert("La imagen no debe superar los 600 KB. Por favor elige otra.");
-      return;
-    }
-
-    setNewProduct((prev) => ({
-      ...prev,
-      archivoImagen: archivo,
-      url_image: "", // Asumo que quieres limpiar la URL si se sube un archivo
-    }));
-  }}
-  className="text-blue-900"
-/>
-
+               <input
+                type="text"
+                value={newProduct.Nombre}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, Nombre: e.target.value })
+                }
+                className="w-full bg-white text-blue-900 rounded-lg px-4 py-2 border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
             <div className="col-span-2">
               <label className="block text-sm font-medium text-blue-900 mb-1">
