@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import {
   eliminarProducto,
   obtenerProductoPorID,
-  obtenerProductos,
 } from "@/services/ProductosService";
 import { eliminarImagen } from "../../services/UploadService";
 import useProductos from "@/hooks/useProducts";
@@ -37,7 +36,6 @@ const ProductsPage = () => {
 
   // Toast states
   const [openToastDelete, setOpenToastDelete] = useState(false);
-  const [openToastEdit, setOpenToastEdit] = useState(false);
 
   const handleEdit = (product) => {
     setSelectedProduct(product);
@@ -187,7 +185,6 @@ const ProductsPage = () => {
 
   // Para ModalEditar, pasa un callback para mostrar el toast al guardar
 
-
   return (
     <div className="flex-column relative z-10">
       <main>
@@ -242,7 +239,7 @@ const ProductsPage = () => {
               product={product}
               onEdit={() => handleEdit(product)}
               onDelete={() => handleDelete(product)}
-               refrescarProductos={recargar}
+              refrescarProductos={recargar}
             />
           ))}
         </motion.div>
@@ -296,7 +293,6 @@ const ProductsPage = () => {
           product={selectedProducto}
         />
 
-   
         <ShowToast
           show={openToastDelete}
           onClose={() => setOpenToastDelete(false)}

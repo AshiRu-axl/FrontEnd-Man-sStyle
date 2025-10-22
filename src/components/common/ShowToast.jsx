@@ -3,7 +3,7 @@ import { useToast, ToastContainer } from "@rewind-ui/core";
 
 /**
  * ShowToast
- * 
+ *
  * Props:
  * - message: string (mensaje a mostrar)
  * - iconType: string (tipo de icono, ej: "success", "error", "info", "warning")
@@ -13,7 +13,7 @@ import { useToast, ToastContainer } from "@rewind-ui/core";
  * - delay: number (milisegundos de espera antes de mostrar el toast, default: 300)
  * - position: string (posición del ToastContainer, default: "top-right")
  */
-export const ShowToast = ({
+const ShowToast = ({
   message = "Producto agregado correctamente",
   iconType = "success",
   color = "green",

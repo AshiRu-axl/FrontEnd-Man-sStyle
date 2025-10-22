@@ -11,16 +11,14 @@ import {
 import { eliminarMarca, obtenerMarcas } from "@/services/MarcasService";
 
 const CategoryPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [openDeleteCategory, setOpenDeleteCategory] = useState(false);
   const [openDeleteBrand, setOpenDeleteBrand] = useState(false);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [categoryData, setCategoryData] = useState([]);
   const [brandData, setBrandData] = useState([]);
-    const { setTitle } = useOutletContext();
-    useEffect(() => {
-      setTitle("Categorizacion");
-    }, [setTitle]);
+  const { setTitle } = useOutletContext();
+  useEffect(() => {
+    setTitle("Categorizacion");
+  }, [setTitle]);
 
   useEffect(() => {
     // Cargar categorías activas
