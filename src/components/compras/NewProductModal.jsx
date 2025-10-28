@@ -101,7 +101,9 @@ const NewProduct = ({
         ID_Sucursal: newProduct.ID_Sucursal,
         ID_Categoria: newProduct.ID_Categoria,
         Cantidad: 0,
-        Precio_Producto: parseFloat(newProduct.Precio_Venta),
+        Precio_Producto: parseFloat(
+          newProduct.Precio_Compra + newProduct.Precio_Compra * 0.15
+        ), // Precio de venta con 25% de ganancia
         Precio_Compra: parseFloat(newProduct.Precio_Compra),
         Detalles: newProduct.Detalles,
         Estado: 1,
@@ -180,7 +182,7 @@ const NewProduct = ({
               <label className="block text-sm font-medium text-blue-900 mb-1">
                 Nombre
               </label>
-               <input
+              <input
                 type="text"
                 value={newProduct.Nombre}
                 onChange={(e) =>
@@ -191,13 +193,16 @@ const NewProduct = ({
             </div>
             <div className="col-span-2">
               <label className="block text-sm font-medium text-blue-900 mb-1">
-                Precio de Venta (C$)
+                Precio de Compra (C$)
               </label>
               <input
                 type="number"
-                value={newProduct.Precio_Venta}
+                value={newProduct.Precio_Compra}
                 onChange={(e) =>
-                  setNewProduct({ ...newProduct, Precio_Venta: e.target.value })
+                  setNewProduct({
+                    ...newProduct,
+                    Precio_Compra: e.target.value,
+                  })
                 }
                 className="w-full bg-white text-blue-900 rounded-lg px-4 py-2 border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

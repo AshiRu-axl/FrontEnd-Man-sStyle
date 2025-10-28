@@ -36,29 +36,7 @@ const CartSummaryBuying = ({
               {item.Nombre}
             </h3>
             <p className="text-xs text-blue-700 flex items-center">
-              Precio de compra: C$
-              <input
-                type="number"
-                value={
-                  item.buyingPrice
-                }
-                onChange={(e) => {
-                  const newPrice = parseFloat(e.target.value);
-                  updateCartItemPrice(item.ID_Producto, newPrice);
-                  // Si el precio es válido, desactiva el error visual
-                  if (priceLeft) {
-                    setPriceLeft(false);
-                  }
-                }}
-                min="0"
-                className={
-                  "w-14 bg-white text-blue-900 border border-blue-200 rounded-lg px-1 py-0.5 focus:outline-none ml-1 text-xs " +
-                  (priceLeft && !item.buyingPrice
-                    ? "ring-2 ring-red-500 border-red-400"
-                    : "focus:ring-2 focus:ring-blue-500")
-                }
-                placeholder="Precio"
-              />{" "}
+              C${item.Precio_Compra}
             </p>
           </div>
 

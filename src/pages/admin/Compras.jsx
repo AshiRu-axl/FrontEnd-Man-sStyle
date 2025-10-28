@@ -8,6 +8,130 @@ import { ExtraerInfoCompra } from "@/services/ProductosService";
 import { agregarCompraProducto } from "@/services/CompraHitorialService";
 import { useOutletContext } from "react-router-dom";
 import { GetIDTotals } from "../../services/ProductosService";
+import ProductCardBought from "@/components/compras/ProductCardBought";
+
+const sampleProducts = [
+  {
+    ID_Producto: 101,
+    Nombre: "Camiseta Básica Blanca",
+    Precio_Compra: 200.0,
+    Precio_Producto: 250.0,
+    Descripcion_Marca: "Man's Style",
+    url_image: "https://via.placeholder.com/300x300?text=Camiseta+Blanca",
+    Descripcion_Categoria: "Ropa",
+    Descripcion_Sucursal: "Tienda Central",
+    ID_Sucursal: 1,
+    Cantidad: 12,
+  },
+  {
+    ID_Producto: 102,
+    Nombre: "Jeans Regular Fit",
+    Precio_Compra: 450.0,
+    Precio_Producto: 560.0,
+    Descripcion_Marca: "DenimCo",
+    url_image: "https://via.placeholder.com/300x300?text=Jeans",
+    Descripcion_Categoria: "Pantalones",
+    Descripcion_Sucursal: "Sucursal Norte",
+    ID_Sucursal: 2,
+    Cantidad: 8,
+  },
+  {
+    ID_Producto: 103,
+    Nombre: "Chaqueta Bomber",
+    Precio_Compra: 1200.0,
+    Precio_Producto: 1500.0,
+    Descripcion_Marca: "UrbanWear",
+    url_image: "https://via.placeholder.com/300x300?text=Chaqueta",
+    Descripcion_Categoria: "Abrigos",
+    Descripcion_Sucursal: "Tienda Central",
+    ID_Sucursal: 1,
+    Cantidad: 5,
+  },
+  {
+    ID_Producto: 104,
+    Nombre: "Zapatillas Running",
+    Precio_Compra: 800.0,
+    Precio_Producto: 999.0,
+    Descripcion_Marca: "RunFast",
+    url_image: "https://via.placeholder.com/300x300?text=Zapatillas",
+    Descripcion_Categoria: "Calzado",
+    Descripcion_Sucursal: "Sucursal Sur",
+    ID_Sucursal: 3,
+    Cantidad: 20,
+  },
+  {
+    ID_Producto: 105,
+    Nombre: "Gorra Trucker",
+    Precio_Compra: 120.0,
+    Precio_Producto: 150.0,
+    Descripcion_Marca: "CapHouse",
+    url_image: "https://via.placeholder.com/300x300?text=Gorra",
+    Descripcion_Categoria: "Accesorios",
+    Descripcion_Sucursal: "Tienda Central",
+    ID_Sucursal: 1,
+    Cantidad: 30,
+  },
+  {
+    ID_Producto: 106,
+    Nombre: "Suéter de Punto",
+    Precio_Compra: 650.0,
+    Precio_Producto: 820.0,
+    Descripcion_Marca: "Knit&Co",
+    url_image: "https://via.placeholder.com/300x300?text=Sueter",
+    Descripcion_Categoria: "Ropa",
+    Descripcion_Sucursal: "Sucursal Norte",
+    ID_Sucursal: 2,
+    Cantidad: 7,
+  },
+  {
+    ID_Producto: 107,
+    Nombre: "Camisa Formal",
+    Precio_Compra: 300.0,
+    Precio_Producto: 375.0,
+    Descripcion_Marca: "OfficeLook",
+    url_image: "https://via.placeholder.com/300x300?text=Camisa",
+    Descripcion_Categoria: "Ropa",
+    Descripcion_Sucursal: "Sucursal Sur",
+    ID_Sucursal: 3,
+    Cantidad: 14,
+  },
+  {
+    ID_Producto: 108,
+    Nombre: "Cinturón de Cuero",
+    Precio_Compra: 180.0,
+    Precio_Producto: 220.0,
+    Descripcion_Marca: "LeatherPro",
+    url_image: "https://via.placeholder.com/300x300?text=Cinturon",
+    Descripcion_Categoria: "Accesorios",
+    Descripcion_Sucursal: "Tienda Central",
+    ID_Sucursal: 1,
+    Cantidad: 25,
+  },
+  {
+    ID_Producto: 109,
+    Nombre: "Sudadera con Capucha",
+    Precio_Compra: 500.0,
+    Precio_Producto: 625.0,
+    Descripcion_Marca: "CozyWear",
+    url_image: "https://via.placeholder.com/300x300?text=Sudadera",
+    Descripcion_Categoria: "Ropa",
+    Descripcion_Sucursal: "Sucursal Norte",
+    ID_Sucursal: 2,
+    Cantidad: 10,
+  },
+  {
+    ID_Producto: 110,
+    Nombre: "Calcetines Pack x3",
+    Precio_Compra: 60.0,
+    Precio_Producto: 75.0,
+    Descripcion_Marca: "FootBasics",
+    url_image: "https://via.placeholder.com/300x300?text=Calcetines",
+    Descripcion_Categoria: "Accesorios",
+    Descripcion_Sucursal: "Sucursal Sur",
+    ID_Sucursal: 3,
+    Cantidad: 50,
+  },
+];
 
 const BuyingPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -18,7 +142,6 @@ const BuyingPage = () => {
   const [lastId, setLastId] = useState(null);
   const [showToastCompra, setShowToastCompra] = useState(false);
   const [priceLeft, setPriceLeft] = useState(false);
-
 
   const { setTitle } = useOutletContext();
   useEffect(() => {
@@ -31,7 +154,6 @@ const BuyingPage = () => {
       setProducts(productos);
       const lastProductId = await GetIDTotals();
       setLastId(lastProductId);
-      
     } catch (error) {
       console.error("Error al cargar productos:", error);
       setProducts([]);
@@ -59,7 +181,14 @@ const BuyingPage = () => {
               ? { ...item, quantity: item.quantity + 1 }
               : item
           )
-        : [...prevCart, { ...product, quantity: 1, buyingPrice: 0 }];
+        : [
+            ...prevCart,
+            {
+              ...product,
+              quantity: 1,
+              buyingPrice: product.Precio_Compra || 0,
+            },
+          ];
     });
   };
 
@@ -92,17 +221,17 @@ const BuyingPage = () => {
       return;
     }
 
-      const faltanPrecios = cartItems.some(
-    (item) =>
-      item.buyingPrice === undefined ||
-      item.buyingPrice === "" ||
-      isNaN(item.buyingPrice) ||
-      Number(item.buyingPrice) <= 0
-  );
-  if (faltanPrecios) {
-    setPriceLeft(true);
-    return;
-  }
+    const faltanPrecios = cartItems.some(
+      (item) =>
+        item.buyingPrice === undefined ||
+        item.buyingPrice === "" ||
+        isNaN(item.buyingPrice) ||
+        Number(item.buyingPrice) <= 0
+    );
+    if (faltanPrecios) {
+      setPriceLeft(true);
+      return;
+    }
 
     try {
       const compraData = {
@@ -129,8 +258,7 @@ const BuyingPage = () => {
 
       if (resultado) {
         setCartItems([]);
-          setShowToastCompra(true); // Activa el toast al finalizar compra
-
+        setShowToastCompra(true); // Activa el toast al finalizar compra
       } else {
         alert("Error al registrar la compra");
       }
@@ -169,11 +297,12 @@ const BuyingPage = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Lista de productos */}
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-min">
-            {filteredProducts.map((product) => (
-              <ProductCardSales
+            {sampleProducts.map((product) => (
+              <ProductCardBought
                 key={product.ID_Producto}
                 name={product.Nombre}
                 price={product.Precio_Producto}
+                boughtPrice={product.Precio_Compra}
                 brand={product.Descripcion_Marca}
                 image={product.url_image}
                 category={product.Descripcion_Categoria}
@@ -229,14 +358,14 @@ const BuyingPage = () => {
         />
 
         <ShowToast
-  show={showToastCompra}
-  onClose={() => setShowToastCompra(false)}
-  message="¡Compra registrada exitosamente!"
-  iconType="success"
-  shadowColor="green"
-  tone="solid"
-  position="bottom-left"
-/>
+          show={showToastCompra}
+          onClose={() => setShowToastCompra(false)}
+          message="¡Compra registrada exitosamente!"
+          iconType="success"
+          shadowColor="green"
+          tone="solid"
+          position="bottom-left"
+        />
       </main>
     </motion.div>
   );

@@ -27,7 +27,7 @@ const Login = () => {
         localStorage.setItem("accessToken", response.access_token);
 
         localStorage.setItem("usuario", JSON.stringify(empleadoInfo));
-        localStorage.setItem("administrado", userRole);
+        localStorage.setItem("rol", userRole);
         localStorage.setItem("idSucursal", idSucursal);
         localStorage.setItem("isAuthenticated", "true");
 
@@ -69,9 +69,7 @@ const Login = () => {
           Iniciar Sesión
         </h2>
         <form
-          onSubmit={() => {
-            navigate("/admin/inicio");
-          }}
+          onSubmit={handleLogin}
           className="w-full max-w-sm mx-auto flex flex-col gap-7"
         >
           <div>

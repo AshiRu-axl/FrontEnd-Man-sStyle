@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { Image, Info } from "lucide-react";
+import { Image, Info, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@rewind-ui/core";
 import { useState } from "react";
 
-const ProductCardSales = ({
+const ProductCardBought = ({
   name,
   Sucursal,
   price,
+  boughtPrice,
   brand,
   category,
   stock,
@@ -50,16 +51,21 @@ const ProductCardSales = ({
           <h3 className="text-sm font-semibold text-blue-900 truncate">
             {name}
           </h3>
-          <p className="text-xs text-blue-700">C${price}</p>
+          <div className="flex flex-row align-center gap-2">
+            <p className="text-xs text-blue-700" size={19}>
+              C${boughtPrice}
+            </p>
+            <ArrowLeft className="text-red-800 size-3" />
+          </div>
+          <div className="flex flex-row align-center gap-2">
+            <p className="text-xs text-blue-700">C${price}</p>
+
+            <ArrowRight className="text-green-800 size-3" />
+          </div>
           <div className="flex flex-wrap gap-1 mt-1 items-center">
             {brand && (
               <span className="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">
                 {brand}
-              </span>
-            )}
-            {category && (
-              <span className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded">
-                {category}
               </span>
             )}
 
@@ -136,4 +142,4 @@ const ProductCardSales = ({
   );
 };
 
-export default ProductCardSales;
+export default ProductCardBought;
