@@ -6,7 +6,6 @@ import {
   obtenerEmpleadosActivos,
   eliminarEmpleado,
 } from "@/services/UsuariosService";
-import { ShowToast } from "@/components/common/ShowToast";
 import { useOutletContext } from "react-router-dom";
 
 const UsersPage = () => {

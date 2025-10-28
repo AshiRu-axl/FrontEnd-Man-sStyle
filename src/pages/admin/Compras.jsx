@@ -6,7 +6,6 @@ import CartSummaryBuying from "@/components/compras/BuyingCartSummary";
 import NewProduct from "@/components/compras/NewProductModal";
 import { ExtraerInfoCompra } from "@/services/ProductosService";
 import { agregarCompraProducto } from "@/services/CompraHitorialService";
-import { ShowToast } from "@/components/common/ShowToast";
 import { useOutletContext } from "react-router-dom";
 import { GetIDTotals } from "../../services/ProductosService";
 
